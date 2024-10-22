@@ -1,8 +1,17 @@
 FROM maven:3.9.8-eclipse-temurin-21 AS build
-COPY . .
-RUN mvn clean package -DskipTests
 
-FROM openjdk:21-jdk
-COPY --from=build /target/azure-basic-app-0.0.1-SNAPSHOT.jar azure-basic-app.jar
+COPY src /app/src
+
+COPY pom.xml /app
+
+WORKDIR /app
+RUN mvn clean install -U
+
+FROM openjdk:21
+COPY --from=build /app/target/azure-basic-app-0.0.1-SNAPSHOT.jar /app/app.jar
+
+WORKDIR /app
+
 EXPOSE 8080
-ENTRYPOINT [ "java","-jar","azure-basic-app.jar" ]
+
+CMD ["java", "-jar", "app.jar"]
