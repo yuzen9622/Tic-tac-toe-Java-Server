@@ -28,34 +28,35 @@ public class UserService {
 		}
 	}
 
-	public Optional<User> loginAndRegister(User user) {
-		Optional<User> userOptional = userRepository.login(user.getEmail(), user.getName());
+	public Optional<User> login(User user) {
+		Optional<User> userOptional = userRepository.login(user.getEmail(), user.getPassword());
 
 		if (userOptional.isPresent()) {
 			return userOptional;
 		} else {
-			Optional<User> userEmail = userRepository.findUserByEmail(user.getEmail());
-			Optional<User> userName = userRepository.findUserByName(user.getName());
+			Optional<User> emailOptional = userRepository.findUserByEmail(user.getEmail());
 
-			if (!userEmail.isPresent() && userName.isPresent())
-				throw new IllegalStateException("email error");
-			if (!userName.isPresent() && userEmail.isPresent())
-				throw new IllegalStateException("name error");
-
-			if (!userName.isPresent() && !userEmail.isPresent()) {
-				addNewUser(user);
-				userOptional = userRepository.login(user.getEmail(), user.getName());
-				return userOptional;
+			if (emailOptional.isPresent()) {
+				throw new IllegalStateException("帳號或密碼錯誤");
+			} else if (!emailOptional.isPresent()) {
+				throw new IllegalStateException("帳號不存在");
 			} else {
-				throw new IllegalStateException("server error");
+				throw new IllegalStateException("伺服器錯誤");
 			}
 
 		}
+
 	}
 
-	public void addNewUser(User user) {
-
-		userRepository.save(user);
+	public Optional<User> register(User user) {
+		Optional<User> emailOptional = userRepository.findUserByEmail(user.getEmail());
+		if (emailOptional.isPresent()) {
+			throw new IllegalStateException("電子郵件已被使用");
+		} else {
+			userRepository.save(user);
+			Optional<User> newUserOptional = userRepository.findById(user.getId());
+			return newUserOptional;
+		}
 
 	}
 }

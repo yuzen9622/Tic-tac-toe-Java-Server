@@ -38,11 +38,11 @@ public class UserController {
 	@PostMapping("/login")
 	public Optional<User> login(@RequestBody User user) {
 
-		return userService.loginAndRegister(user);
+		return userService.login(user);
 	}
 
-//	@PostMapping("/add")
-//	public void addUser(@RequestBody User user) {
-//		userService.addNewUser(user);
-//	}
+	@PostMapping("/register")
+	public Optional<User> register(@RequestBody User user) {
+		return userService.register(user);
+	}
 }

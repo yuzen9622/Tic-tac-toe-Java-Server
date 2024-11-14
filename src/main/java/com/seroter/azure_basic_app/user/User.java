@@ -13,6 +13,7 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "\"user\"")
 public class User {
+
 	@Id
 	@SequenceGenerator(name = "user_sequence", allocationSize = 1, sequenceName = "user_sequence")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
@@ -20,18 +21,27 @@ public class User {
 
 	private String name;
 	private String email;
+	private String password;
 	@Transient
 	private LocalDate date;
 
 	public User() {
 	}
 
-	public User(Long id, String name, String email) {
+	public User(Long id, String name, String email, String password) {
 
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.password = password;
 
+	}
+
+	public User(String name, String email, String password) {
+
+		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 
 	public User(String name, String email) {
@@ -73,9 +83,18 @@ public class User {
 		this.date = date;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", date=" + date + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", date=" + date
+				+ "]";
 	}
 
 }
