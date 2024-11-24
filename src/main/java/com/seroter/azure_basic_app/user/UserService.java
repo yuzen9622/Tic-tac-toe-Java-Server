@@ -22,6 +22,7 @@ public class UserService {
 	public Optional<User> getUserById(Long id) {
 		Optional<User> userOptional = userRepository.findById(id);
 		if (userOptional.isPresent()) {
+
 			return userOptional;
 		} else {
 			throw new IllegalStateException("no user");

@@ -2,6 +2,8 @@ package com.seroter.azure_basic_app.user;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class User {
 
 	private String name;
 	private String email;
+	@JsonIgnore
 	private String password;
 	@Transient
 	private LocalDate date;
@@ -34,6 +37,14 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+
+	}
+
+	public User(Long id, String name, String email) {
+
+		this.id = id;
+		this.name = name;
+		this.email = email;
 
 	}
 
