@@ -1,6 +1,6 @@
 package com.seroter.azure_basic_app.user;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -26,7 +26,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Transient
-    private LocalDate date;
+    private LocalDateTime date;
 
     public User() {
     }
@@ -86,11 +86,11 @@ public class User {
         this.email = email;
     }
 
-    public LocalDate getDate() {
-        return LocalDate.now();
+    public LocalDateTime getDate() {
+        return LocalDateTime.now();
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

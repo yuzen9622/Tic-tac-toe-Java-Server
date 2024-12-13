@@ -14,106 +14,107 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class History {
-	@Id
-	@SequenceGenerator(name = "history_sequence", allocationSize = 1, sequenceName = "history_sequence")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_sequence")
-	private Long id;
-	private Long member1;
-	private Long member2;
-	private String[] gameStatus;
-	private String[] winner;
-	private String[] winStatus;
-	private LocalDateTime date;
 
-	public History() {
+    @Id
+    @SequenceGenerator(name = "history_sequence", allocationSize = 1, sequenceName = "history_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "history_sequence")
+    private Long id;
+    private Long member1;
+    private Long member2;
+    private String[] gameStatus;
+    private String[] winner;
+    private String[] winStatus;
+    private LocalDateTime date;
 
-	}
+    public History() {
 
-	public History(Long id, Long member1, Long member2, String[] gameStatus, String[] winner, String[] winStatus) {
+    }
 
-		this.id = id;
-		this.member1 = member1;
-		this.member2 = member2;
-		this.gameStatus = gameStatus;
-		this.winner = winner;
+    public History(Long id, Long member1, Long member2, String[] gameStatus, String[] winner, String[] winStatus) {
 
-	}
+        this.id = id;
+        this.member1 = member1;
+        this.member2 = member2;
+        this.gameStatus = gameStatus;
+        this.winner = winner;
 
-	public History(Long member1, Long member2, String[] gameStatus, String[] winner, String[] winStatus) {
+    }
 
-		this.member1 = member1;
-		this.member2 = member2;
-		this.gameStatus = gameStatus;
-		this.winner = winner;
-		this.winStatus = winStatus;
-	}
+    public History(Long member1, Long member2, String[] gameStatus, String[] winner, String[] winStatus) {
 
-	@PrePersist
-	protected void onCreate() {
-		this.date = LocalDateTime.now();
-	}
+        this.member1 = member1;
+        this.member2 = member2;
+        this.gameStatus = gameStatus;
+        this.winner = winner;
+        this.winStatus = winStatus;
+    }
 
-	public String[] getWinner() {
-		return winner;
-	}
+    @PrePersist
+    protected void onCreate() {
+        this.date = LocalDateTime.now();
+    }
 
-	public void setWinner(String[] winner) {
-		this.winner = winner;
-	}
+    public String[] getWinner() {
+        return winner;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setWinner(String[] winner) {
+        this.winner = winner;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Long getMember1() {
-		return member1;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setMember1(Long member1) {
-		this.member1 = member1;
-	}
+    public Long getMember1() {
+        return member1;
+    }
 
-	public Long getMember2() {
-		return member2;
-	}
+    public void setMember1(Long member1) {
+        this.member1 = member1;
+    }
 
-	public void setMember2(Long member2) {
-		this.member2 = member2;
-	}
+    public Long getMember2() {
+        return member2;
+    }
 
-	public LocalDateTime getDate() {
-		return date;
-	}
+    public void setMember2(Long member2) {
+        this.member2 = member2;
+    }
 
-	public void setDate() {
-		this.date = LocalDateTime.now();
-	}
+    public LocalDateTime getDate() {
+        return date;
+    }
 
-	public String[] getGameStatus() {
-		return gameStatus;
-	}
+    public void setDate() {
+        this.date = LocalDateTime.now();
+    }
 
-	public void setGameStatus(String[] gameStatus) {
-		this.gameStatus = gameStatus;
-	}
+    public String[] getGameStatus() {
+        return gameStatus;
+    }
 
-	public String[] getWinStatus() {
-		return winStatus;
-	}
+    public void setGameStatus(String[] gameStatus) {
+        this.gameStatus = gameStatus;
+    }
 
-	public void setWinStatus(String[] winStatus) {
-		this.winStatus = winStatus;
-	}
+    public String[] getWinStatus() {
+        return winStatus;
+    }
 
-	@Override
-	public String toString() {
-		return "History [id=" + id + ", member1=" + member1 + ", member2=" + member2 + ", gameStatus="
-				+ Arrays.toString(gameStatus) + ", winner=" + Arrays.toString(winner) + ", winStatus="
-				+ Arrays.toString(winStatus) + ", date=" + date + "]";
-	}
+    public void setWinStatus(String[] winStatus) {
+        this.winStatus = winStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "History [id=" + id + ", member1=" + member1 + ", member2=" + member2 + ", gameStatus="
+                + Arrays.toString(gameStatus) + ", winner=" + Arrays.toString(winner) + ", winStatus="
+                + Arrays.toString(winStatus) + ", date=" + date + "]";
+    }
 
 }
